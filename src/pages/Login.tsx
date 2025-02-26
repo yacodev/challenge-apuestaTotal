@@ -1,28 +1,12 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store/useStore';
-
-enum Themes {
-  light = 'light',
-  dark = 'dark',
-}
+import { useThemes } from '../hooks/useThemes';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [theme, setTheme] = useState<Themes>(Themes.light);
+
   const { name, setName } = useUserStore();
-
-  useEffect(() => {
-    if (theme === Themes.light) {
-      document.documentElement.classList.add(Themes.dark);
-    } else {
-      document.documentElement.classList.remove(Themes.dark);
-    }
-  }, [theme]);
-
-  const handleChangeTheme = () => {
-    setTheme(theme === Themes.light ? Themes.dark : Themes.light);
-  };
+  const { handleChangeTheme } = useThemes();
 
   const handleSubmit = () => {
     if (name) {
