@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Themes } from '../interface';
+import { useThemeStore } from '../store';
 
 export const useThemes = () => {
-  const [theme, setTheme] = useState<Themes>(Themes.light);
+  const { theme, setTheme } = useThemeStore();
 
   useEffect(() => {
     if (theme === Themes.light) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useUserStore } from '../store/useStore';
+import { useUserStore } from '../store';
 import { pokemonServices } from '../services/pokemonServices';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { Themes } from '../interface';

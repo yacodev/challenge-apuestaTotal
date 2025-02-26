@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useUserStore } from '../store/useStore';
+import { useUserStore } from '../store';
 import { useThemes } from '../hooks/useThemes';
 
 const Login = () => {
