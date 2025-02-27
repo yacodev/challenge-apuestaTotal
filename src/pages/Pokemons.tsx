@@ -4,6 +4,7 @@ import { pokemonServices } from '../services/pokemonServices';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { Themes } from '../interface';
 import { useThemes } from '../hooks/useThemes';
+import SearchModal from '../components/SearchModal';
 
 interface Pokemon {
   name: string;
@@ -23,6 +24,7 @@ const Pokemons = () => {
   const [pokemonsByType, setPokemonsByType] = useState<PokemonsByType>({});
   const [loading, setLoading] = useState(true);
   const { theme, handleChangeTheme } = useThemes();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const fetchPokemonsByType = async (type: string) => {
     try {
@@ -77,21 +79,36 @@ const Pokemons = () => {
   return (
     <div className='min-h-screen bg-gray-100 dark:bg-gray-900 p-8'>
       <div className='max-w-7xl mx-auto'>
-        <div className='flex items-center justify-between mb-8'>
-          <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
-            Bienvenido, {name}!
-          </h1>
-          <button
-            onClick={handleChangeTheme}
-            className='p-2 rounded-full bg-yellow-100 dark:bg-gray-800 text-yellow-500 dark:text-yellow-300 hover:bg-yellow-200 dark:hover:bg-gray-700 transition-colors'
-            aria-label='Cambiar tema'
-          >
-            {theme === Themes.light ? (
-              <FaMoon className='w-6 h-6' />
-            ) : (
-              <FaSun className='w-6 h-6' />
-            )}
-          </button>
+        <div className='flex items-center justify-between mb-8 w-100%'>
+          <div>
+            <div className='flex items-center justify-center space-x-4'>
+              <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
+                Bienvenido, {name}!
+              </h1>
+              <button
+                onClick={handleChangeTheme}
+                className='p-2 rounded-full bg-yellow-100 dark:bg-gray-800 text-yellow-500 dark:text-yellow-300 hover:bg-yellow-200 dark:hover:bg-gray-700 transition-colors'
+                aria-label='Cambiar tema'
+              >
+                {theme === Themes.light ? (
+                  <FaMoon className='w-6 h-6' />
+                ) : (
+                  <FaSun className='w-6 h-6' />
+                )}
+              </button>
+            </div>
+            <div>
+              <div className='flex items-center justify-between mb-6'>
+                <input
+                  type='text'
+                  onClick={() => setIsSearchOpen(true)}
+                  placeholder='Buscar Pokémon...'
+                  className='w-full p-4 text-xl border-b-2 border-gray-300 dark:border-gray-700 bg-transparent text-gray-900 dark:text-white focus:outline-none focus:border-blue-500'
+                  autoFocus
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
         {POKEMON_TYPES.map((type) => (
@@ -121,6 +138,11 @@ const Pokemons = () => {
           </div>
         ))}
       </div>
+
+      <SearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+      />
     </div>
   );
 };

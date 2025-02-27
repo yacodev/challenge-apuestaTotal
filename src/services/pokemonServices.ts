@@ -21,6 +21,24 @@ interface PokemonDetails {
   };
 }
 
+interface Pokemon {
+  id: number;
+  name: string;
+  sprites: {
+    front_default: string;
+  };
+}
+
+interface PokemonListResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: {
+    name: string;
+    url: string;
+  }[];
+}
+
 export const pokemonServices = {
   getPokemonsByType: async (type: string) => {
     try {
@@ -41,6 +59,60 @@ export const pokemonServices = {
     } catch (error) {
       console.error('Error fetching pokemon details:', error);
       return null;
+    }
+  },
+
+  searchPokemonByName: async (name: string): Promise<Pokemon | null> => {
+    try {
+      const { data } = await axios.get(
+        `${BASE_URL}/pokemon/${name.toLowerCase()}`
+      );
+      return {
+        id: data.id,
+        name: data.name,
+        sprites: {
+          front_default: data.sprites.front_default,
+        },
+      };
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return null;
+      }
+      throw error;
+    }
+  },
+
+  getPokemonList: async (
+    offset: number = 0,
+    limit: number = 30
+  ): Promise<{ pokemons: Pokemon[]; hasMore: boolean }> => {
+    try {
+      const { data } = await axios.get<PokemonListResponse>(
+        `${BASE_URL}/pokemon?limit=${limit}&offset=${offset}`
+      );
+
+      const pokemonPromises = data.results.map(async (pokemon) => {
+        const response = await axios.get(pokemon.url);
+        return {
+          id: response.data.id,
+          name: response.data.name,
+          sprites: {
+            front_default: response.data.sprites.front_default,
+          },
+        };
+      });
+
+      const pokemons = await Promise.all(pokemonPromises);
+      return {
+        pokemons,
+        hasMore: !!data.next,
+      };
+    } catch (error) {
+      console.error('Error fetching pokemon list:', error);
+      return {
+        pokemons: [],
+        hasMore: false,
+      };
     }
   },
 };
