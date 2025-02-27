@@ -11,7 +11,7 @@ export default defineConfig({
       name: 'host',
       filename: 'remoteEntry.js',
       exposes: {
-        './store': './src/store/useStore.ts',
+        './pokemonStore': './src/store/pokemonStore/index.ts',
         './pokemonServices': './src/services/pokemonServices.ts',
       },
       remotes: {

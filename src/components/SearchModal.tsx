@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { pokemonServices } from '../services/pokemonServices';
-import { useUserStore } from '../store/useStore';
+import { usePokemonStore } from '../store';
 import { useNavigate } from 'react-router-dom';
 
 interface SearchModalProps {
@@ -43,7 +43,7 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
     [loading, hasMore]
   );
   const navigate = useNavigate();
-  const setSelectedPokemon = useUserStore((state) => state.setSelectedPokemon);
+  const { setSelectedPokemon, setListSelectedPokemon } = usePokemonStore();
 
   const loadPokemons = useCallback(async () => {
     if (!isOpen) return;
@@ -108,6 +108,7 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
 
   const handlePokemonSelect = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
+    setListSelectedPokemon(pokemon);
     onClose();
     navigate('/details'); // Asumiendo que tienes una ruta /details en tu router
   };
