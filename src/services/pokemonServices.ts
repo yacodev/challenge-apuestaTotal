@@ -1,32 +1,19 @@
 import axios from 'axios';
+import { PokemonDetails, Pokemon } from '../interface/pokemon.interface';
 
 const BASE_URL = 'https://pokeapi.co/api/v2';
 
-interface PokemonsResponse {
-  pokemon: PokemonsData[];
-}
-
-interface PokemonsData {
-  pokemon: Pokemons;
-}
-
-interface Pokemons {
+interface PokemonInfo {
   name: string;
   url: string;
 }
 
-interface PokemonDetails {
-  sprites: {
-    front_default: string;
-  };
+interface PokemonsData {
+  pokemon: PokemonInfo;
 }
 
-interface Pokemon {
-  id: number;
-  name: string;
-  sprites: {
-    front_default: string;
-  };
+interface PokemonsResponse {
+  pokemon: PokemonsData[];
 }
 
 interface PokemonListResponse {
@@ -96,6 +83,7 @@ export const pokemonServices = {
         return {
           id: response.data.id,
           name: response.data.name,
+          url: pokemon.url,
           sprites: {
             front_default: response.data.sprites.front_default,
           },
@@ -116,3 +104,5 @@ export const pokemonServices = {
     }
   },
 };
+
+export default pokemonServices;

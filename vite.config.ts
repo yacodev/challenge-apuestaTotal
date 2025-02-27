@@ -8,13 +8,16 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: 'home',
+      name: 'host',
       filename: 'remoteEntry.js',
-      exposes: {},
+      exposes: {
+        './store': './src/store/useStore.ts',
+        './pokemonServices': './src/services/pokemonServices.ts',
+      },
       remotes: {
         details: 'http://localhost:3001/assets/remoteEntry.js',
       },
-      shared: ['react', 'react-dom'],
+      shared: ['react', 'react-dom', 'zustand'],
     }),
     tailwindcss(),
   ],

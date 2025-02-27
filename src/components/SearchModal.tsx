@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { pokemonServices } from '../services/pokemonServices';
+import { useUserStore } from '../store/useStore';
+import { useNavigate } from 'react-router-dom';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -10,6 +12,7 @@ interface SearchModalProps {
 interface Pokemon {
   id: number;
   name: string;
+  url?: string;
   sprites: {
     front_default: string;
   };
@@ -39,12 +42,15 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
     },
     [loading, hasMore]
   );
+  const navigate = useNavigate();
+  const setSelectedPokemon = useUserStore((state) => state.setSelectedPokemon);
 
   const loadPokemons = useCallback(async () => {
     if (!isOpen) return;
     setLoading(true);
     try {
       const result = await pokemonServices.getPokemonList(offset);
+      console.log('result', result);
       setSearchResults((prev) => [...prev, ...result.pokemons]);
       setHasMore(result.hasMore);
     } catch (error) {
@@ -100,6 +106,12 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
     }
   }, [offset, loadPokemons, searchTerm]);
 
+  const handlePokemonSelect = (pokemon: Pokemon) => {
+    setSelectedPokemon(pokemon);
+    onClose();
+    navigate('/details'); // Asumiendo que tienes una ruta /details en tu router
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -138,7 +150,8 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
                     ? lastPokemonElementRef
                     : null
                 }
-                className='bg-gray-100 dark:bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center'
+                onClick={() => handlePokemonSelect(pokemon)}
+                className='bg-gray-100 dark:bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors'
               >
                 <img
                   src={pokemon.sprites.front_default}
