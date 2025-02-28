@@ -1,14 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { pokemonServices } from '../services/pokemonServices';
-import { usePokemonStore } from '../store';
+import { pokemonServices } from '../../services/pokemonServices';
+import { usePokemonStore } from '../../store';
 import { useNavigate } from 'react-router-dom';
-import { Pokemon } from '../interface';
-
-interface SearchModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+import { Pokemon } from '../../interface';
+import { SearchModalProps } from './interface';
+import Loading from '../Loading';
 
 const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -42,7 +39,6 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
     setLoading(true);
     try {
       const result = await pokemonServices.getPokemonList(offset);
-      console.log('result', result);
       setSearchResults((prev) => [...prev, ...result.pokemons]);
       setHasMore(result.hasMore);
     } catch (error) {
@@ -157,11 +153,7 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
             ))}
           </div>
 
-          {loading && (
-            <div className='text-center text-gray-600 dark:text-gray-400 mt-4 p-4'>
-              Cargando más Pokémon...
-            </div>
-          )}
+          {loading && <Loading />}
         </div>
       </div>
     </div>

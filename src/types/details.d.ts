@@ -16,7 +16,7 @@ declare module 'history/PokemonHistory' {
   export default PokemonHistory;
 }
 
-declare module 'history/PokemonCard' {
+declare module 'history/HistoryCard' {
   import { FC } from 'react';
 
   interface PokemonDetails {

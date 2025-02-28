@@ -1,12 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store';
 import { useThemes } from '../hooks/useThemes';
+import { useEffect } from 'react';
 
 const Login = () => {
   const navigate = useNavigate();
-
   const { name, setName } = useUserStore();
   const { handleChangeTheme } = useThemes();
+
+  useEffect(() => {
+    setName('');
+  }, []);
 
   const handleSubmit = () => {
     if (name) {

@@ -6,5 +6,5 @@ export const pokemonSlice: StateCreator<PokemonState> = (set, get) => ({
   listSelectedPokemon: [],
   setSelectedPokemon: (pokemon) => set({ selectedPokemon: pokemon }),
   setListSelectedPokemon: (pokemon) =>
-    set({ listSelectedPokemon: [...get().listSelectedPokemon, pokemon] }),
+    set({ listSelectedPokemon: [pokemon, ...get().listSelectedPokemon] }),
 });
