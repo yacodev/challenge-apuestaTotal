@@ -11,7 +11,7 @@ Herramientas que se utilizaron:
 
 Puedes acceder al link desplegado en: https://challenge-apuestatotal.vercel.app
 
-![vista ](https://drive.google.com/file/d/1NrVyHGDRqp2y9aFrhVzJ24l-yvVSVE1z/view?usp=drive_link)
+
 
 ## Explicación de la App
 
@@ -81,3 +81,10 @@ npm run dev
 
 ##  Licencia
 Este proyecto esta bajo la licencia [MIT](/LICENCE).
+
+
+## vista
+
+![vista ](https://github.com/yacodev/test/blob/1c56988130d4a2fd777d107ec6f7a355de9c5f66/src/assets/login.png)
+
+![vista ](https://github.com/yacodev/test/blob/1c56988130d4a2fd777d107ec6f7a355de9c5f66/src/assets/pokemons.png)
