@@ -16,6 +16,7 @@ export default defineConfig({
       },
       remotes: {
         details: 'http://localhost:3001/assets/remoteEntry.js',
+        history: 'http://localhost:3002/assets/remoteEntry.js',
       },
       shared: ['react', 'react-dom', 'zustand'],
     }),

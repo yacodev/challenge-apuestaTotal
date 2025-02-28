@@ -18,16 +18,27 @@ interface Ability {
   ability: AbilityData;
 }
 
-export interface PokemonDetails {
-  sprites: {
-    front_default: string;
+interface Specie {
+  name: string;
+}
+interface Types {
+  type: {
+    name: string;
   };
+}
+
+export interface PokemonDetails {
   abilities: Ability[];
   height: number;
   weight: number;
   id: number;
   name: string;
   base_experience: number;
+  sprites: {
+    front_default: string;
+  };
+  species: Specie;
+  types: Types[];
 }
 
 export enum pokemonTypes {

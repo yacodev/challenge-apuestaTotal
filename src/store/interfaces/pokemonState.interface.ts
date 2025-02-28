@@ -1,8 +1,8 @@
-import { Pokemon } from '../../interface';
+import { Pokemon, PokemonDetails } from '../../interface';
 
 export interface PokemonState {
   selectedPokemon: Pokemon | null;
-  listSelectedPokemon: Pokemon[];
+  listSelectedPokemon: PokemonDetails[];
   setSelectedPokemon: (pokemon: Pokemon) => void;
-  setListSelectedPokemon: (pokemon: Pokemon) => void;
+  setListSelectedPokemon: (pokemon: PokemonDetails) => void;
 }

@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Login from '../pages/Login';
 import Pokemons from '../pages/Pokemons';
-//import Header from 'details/Header';
+import PokemonHistory from 'history/PokemonHistory';
 import PokemonDetails from 'details/PokemonDetails';
 
 const AppRoutes = () => {
@@ -10,7 +10,7 @@ const AppRoutes = () => {
       <Route path='/' element={<Login />} />
       <Route path='/pokemons' element={<Pokemons />} />
       <Route path='/details' element={<PokemonDetails />} />
-      {/* <Route path='/details' element={<Header />} /> */}
+      {<Route path='/history' element={<PokemonHistory />} />}
     </Routes>
   );
 };

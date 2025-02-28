@@ -9,3 +9,9 @@ declare module 'details/PokemonDetails' {
   const PokemonDetails: FC;
   export default PokemonDetails;
 }
+
+declare module 'history/PokemonHistory' {
+  import { FC } from 'react';
+  const PokemonHistory: FC;
+  export default PokemonHistory;
+}

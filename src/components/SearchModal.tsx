@@ -35,7 +35,7 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
     [loading, hasMore]
   );
   const navigate = useNavigate();
-  const { setSelectedPokemon, setListSelectedPokemon } = usePokemonStore();
+  const { setSelectedPokemon } = usePokemonStore();
 
   const loadPokemons = useCallback(async () => {
     if (!isOpen) return;
@@ -100,7 +100,6 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
 
   const handlePokemonSelect = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
-    setListSelectedPokemon(pokemon);
     onClose();
     navigate('/details'); // Asumiendo que tienes una ruta /details en tu router
   };
