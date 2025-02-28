@@ -3,7 +3,9 @@ import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
 import tailwindcss from '@tailwindcss/vite';
 
-// https://vite.dev/config/
+const DETAILS_URL = process.env.VITE_DETAILS_URL || 'http://localhost:3001';
+const HISTORY_URL = process.env.VITE_HISTORY_URL || 'http://localhost:3002';
+
 export default defineConfig({
   plugins: [
     react(),
@@ -15,8 +17,8 @@ export default defineConfig({
         './pokemonServices': './src/services/pokemonServices.ts',
       },
       remotes: {
-        details: 'http://localhost:3001/assets/remoteEntry.js',
-        history: 'http://localhost:3002/assets/remoteEntry.js',
+        details: `${DETAILS_URL}/assets/remoteEntry.js`,
+        history: `${HISTORY_URL}/assets/remoteEntry.js`,
       },
       shared: ['react', 'react-dom', 'zustand'],
     }),
