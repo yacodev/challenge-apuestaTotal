@@ -101,7 +101,7 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
   const handlePokemonSelect = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
     onClose();
-    navigate('/details'); // Asumiendo que tienes una ruta /details en tu router
+    navigate('/details');
   };
 
   if (!isOpen) return null;

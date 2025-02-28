@@ -15,3 +15,29 @@ declare module 'history/PokemonHistory' {
   const PokemonHistory: FC;
   export default PokemonHistory;
 }
+
+declare module 'history/PokemonCard' {
+  import { FC } from 'react';
+
+  interface PokemonDetails {
+    id: number;
+    name: string;
+    sprites: {
+      front_default: string;
+    };
+    types: Array<{
+      type: {
+        name: string;
+      };
+    }>;
+    height: number;
+    weight: number;
+  }
+
+  interface PokemonCardProps {
+    pokemon: PokemonDetails;
+  }
+
+  const PokemonCard: FC<PokemonCardProps>;
+  export default PokemonCard;
+}
