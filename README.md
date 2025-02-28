@@ -11,7 +11,7 @@ Herramientas que se utilizaron:
 
 Puedes acceder al link desplegado en: https://challenge-apuestatotal.vercel.app
 
-![vista ](https://github.com/yacodev/challenge-indra/assets/6935006/430d8678-65ef-4c73-bf36-3af0258707eb)
+![vista ](https://drive.google.com/file/d/1NrVyHGDRqp2y9aFrhVzJ24l-yvVSVE1z/view?usp=drive_link)
 
 ## Explicación de la App
 
@@ -77,7 +77,7 @@ npm run dev
 
 ## Contacto
 * Linkedin: [carlos yaco](https://www.linkedin.com/in/carlos-yaco-tincusi/)
-* website: [web](https://carlosyaco.com)
+* website: [web](https://yacodev.com)
 
 ##  Licencia
 Este proyecto esta bajo la licencia [MIT](/LICENCE).
