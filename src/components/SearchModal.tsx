@@ -3,19 +3,11 @@ import { FaTimes } from 'react-icons/fa';
 import { pokemonServices } from '../services/pokemonServices';
 import { usePokemonStore } from '../store';
 import { useNavigate } from 'react-router-dom';
+import { Pokemon } from '../interface';
 
 interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
-}
-
-interface Pokemon {
-  id: number;
-  name: string;
-  url?: string;
-  sprites: {
-    front_default: string;
-  };
 }
 
 const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {

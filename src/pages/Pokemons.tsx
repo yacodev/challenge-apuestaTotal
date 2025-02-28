@@ -2,21 +2,17 @@ import { useEffect, useState } from 'react';
 import { useUserStore } from '../store';
 import { pokemonServices } from '../services/pokemonServices';
 import { FaSun, FaMoon } from 'react-icons/fa';
-import { Themes } from '../interface';
+import { Themes, Pokemon, pokemonTypes, PokemonsByType } from '../interface';
 import { useThemes } from '../hooks/useThemes';
 import SearchModal from '../components/SearchModal';
 
-interface Pokemon {
-  name: string;
-  url: string;
-  sprite?: string;
-}
-
-interface PokemonsByType {
-  [key: string]: Pokemon[];
-}
-
-const POKEMON_TYPES = ['fire', 'water', 'electric', 'dragon', 'ghost'];
+const POKEMON_TYPES = [
+  pokemonTypes.fire,
+  pokemonTypes.water,
+  pokemonTypes.electric,
+  pokemonTypes.dragon,
+  pokemonTypes.ghost,
+];
 
 const Pokemons = () => {
   const { name } = useUserStore();
@@ -26,24 +22,27 @@ const Pokemons = () => {
   const { theme, handleChangeTheme } = useThemes();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  const fetchPokemonsByType = async (type: string) => {
+  const getListPokemonsByType = async (type: string) => {
     try {
       const pokemonList = await pokemonServices.getPokemonsByType(type);
 
-      const pokemonsWithSprites = await Promise.all(
+      const pokemons: Pokemon[] = await Promise.all(
         pokemonList.map(async (pokemonData) => {
           const pokemonInfo = await pokemonServices.getPokemonDetails(
             pokemonData.pokemon.url
           );
           return {
+            id: pokemonInfo!.id,
             name: pokemonData.pokemon.name,
             url: pokemonData.pokemon.url,
-            sprite: pokemonInfo?.sprites.front_default,
+            sprites: {
+              front_default: pokemonInfo!.sprites.front_default ?? '',
+            },
           };
         })
       );
 
-      return pokemonsWithSprites;
+      return pokemons;
     } catch (error) {
       console.error(`Error processing ${type} type pokemons:`, error);
       return [];
@@ -51,19 +50,19 @@ const Pokemons = () => {
   };
 
   useEffect(() => {
-    const fetchAllTypes = async () => {
+    const getAllPokemonsByTypes = async () => {
       setLoading(true);
       const results: PokemonsByType = {};
 
       for (const type of POKEMON_TYPES) {
-        results[type] = await fetchPokemonsByType(type);
+        results[type] = await getListPokemonsByType(type);
       }
 
       setPokemonsByType(results);
       setLoading(false);
     };
 
-    fetchAllTypes();
+    getAllPokemonsByTypes();
   }, []);
 
   if (loading) {
@@ -122,9 +121,9 @@ const Pokemons = () => {
                   key={pokemon.name}
                   className='bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow'
                 >
-                  {pokemon.sprite && (
+                  {pokemon.sprites && (
                     <img
-                      src={pokemon.sprite}
+                      src={pokemon.sprites.front_default}
                       alt={pokemon.name}
                       className='w-24 h-24 mx-auto'
                     />

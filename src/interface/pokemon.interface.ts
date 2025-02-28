@@ -7,6 +7,10 @@ export interface Pokemon {
   };
 }
 
+export interface PokemonsByType {
+  [key: string]: Pokemon[];
+}
+
 interface AbilityData {
   name: string;
 }
@@ -24,4 +28,12 @@ export interface PokemonDetails {
   id: number;
   name: string;
   base_experience: number;
+}
+
+export enum pokemonTypes {
+  fire = 'fire',
+  water = 'water',
+  electric = 'electric',
+  dragon = 'dragon',
+  ghost = 'ghost',
 }

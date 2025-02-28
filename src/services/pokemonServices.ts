@@ -3,17 +3,17 @@ import { PokemonDetails, Pokemon } from '../interface/pokemon.interface';
 
 const BASE_URL = 'https://pokeapi.co/api/v2';
 
-interface PokemonInfo {
+interface PokemonInfoResponse {
   name: string;
   url: string;
 }
 
-interface PokemonsData {
-  pokemon: PokemonInfo;
+interface PokemonByTypeResponse {
+  pokemon: PokemonInfoResponse;
 }
 
-interface PokemonsResponse {
-  pokemon: PokemonsData[];
+interface PokemonListByTypeResponse {
+  pokemon: PokemonByTypeResponse[];
 }
 
 interface PokemonListResponse {
@@ -29,7 +29,7 @@ interface PokemonListResponse {
 export const pokemonServices = {
   getPokemonsByType: async (type: string) => {
     try {
-      const { data } = await axios.get<PokemonsResponse>(
+      const { data } = await axios.get<PokemonListByTypeResponse>(
         `${BASE_URL}/type/${type}`
       );
       return data.pokemon.slice(0, 10);
