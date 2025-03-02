@@ -33,4 +33,10 @@ export default defineConfig({
     minify: false,
     cssCodeSplit: false,
   },
+  server: {
+    cors: {
+      origin: '*',
+      methods: ['GET', 'OPTIONS'],
+    },
+  },
 });
