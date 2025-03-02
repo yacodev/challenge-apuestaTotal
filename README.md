@@ -9,7 +9,7 @@ Herramientas que se utilizaron:
 - axios para obtener los datos de la API.
 - react-router-dom para la navegación
 
-Puedes acceder al link desplegado en: https://challenge-apuestatotal.vercel.app
+Puedes acceder al link desplegado en: https://challenge-apuesta-total.vercel.app/
 
 
 
