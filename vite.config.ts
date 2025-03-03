@@ -6,8 +6,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const DETAILS_URL = process.env.VITE_DETAILS_URL ?? 'http://localhost:3001';
-const HISTORY_URL = process.env.VITE_HISTORY_URL ?? 'http://localhost:3002';
+const DETAILS_URL =
+  process.env.VITE_DETAILS_URL ?? 'https://microfrontend-details.vercel.app';
+const HISTORY_URL =
+  process.env.VITE_HISTORY_URL ?? 'https://microfrontend-history.vercel.app';
 
 export default defineConfig({
   plugins: [
@@ -37,6 +39,9 @@ export default defineConfig({
     cors: {
       origin: '*',
       methods: ['GET', 'OPTIONS'],
+    },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
     },
   },
 });
